@@ -1,0 +1,23 @@
+certspy
+=======
+small tool that lists alt names included in a domain's certificate.
+for OSINT collection or subdomain enumeration.
+
+usage
+-----
+	certspy [domain]
+
+example:
+
+	$ ./certspy bsd.lv
+	bsd.lv
+	cvsweb.bsd.lv
+	kristaps.bsd.lv
+	learnbchs.org
+	man.bsd.lv
+	mandoc.bsd.lv
+	manpages.bsd.lv
+	mdocml.bsd.lv
+	www.bsd.lv
+	www.learnbchs.org
+
