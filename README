@@ -21,3 +21,10 @@ example:
 	www.bsd.lv
 	www.learnbchs.org
 
+install
+-------
+make sure $GOBIN is in your $PATH and run:
+
+	go install go.zakaria.org/certspy@latest
+
+to build from source run `make`.
