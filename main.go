@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,10 +11,14 @@ import (
 func init() {
 	log.SetFlags(0)
 	log.SetPrefix("certspy: ")
+
+	// use flag solely for usage handling
+	flag.Usage = usage
+	flag.Parse()
 }
 
 func usage() {
-	fmt.Printf("usage: certspy [domain]\n")
+	fmt.Fprintf(os.Stderr, "usage: certspy [domain]\n")
 }
 
 func main() {
