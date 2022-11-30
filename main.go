@@ -18,13 +18,15 @@ func usage() {
 
 func main() {
 	if len(os.Args) < 2 {
-		log.Fatal("must specifiy hostname\n")
+		log.Printf("error: must specifiy hostname.\n")
+		usage()
+		os.Exit(1)
 	}
 
 	hostname := os.Args[1]
 	r, err := http.Get(fmt.Sprintf("https://%s/", hostname))
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("error: %v", err)
 	}
 
 	// get cert and print its alt names
