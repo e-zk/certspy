@@ -8,21 +8,25 @@ import (
 	"os"
 )
 
+var redirect bool
+
 func init() {
 	log.SetFlags(0)
 	log.SetPrefix("certspy: ")
 
-	// use flag solely for usage handling
+	flag.BoolVar(&redirect, "r", false, "")
 	flag.Usage = usage
 	flag.Parse()
 }
 
 func usage() {
-	fmt.Fprintf(os.Stderr, "usage: certspy [domain]\n")
+	fmt.Fprintf(os.Stderr, "usage: certspy [-r] domain\n")
+	fmt.Fprintf(os.Stderr, "where:\n")
+	fmt.Fprintf(os.Stderr, "       -r\tenable following redirects\n")
 }
 
 func main() {
-	if len(os.Args) < 2 {
+	if len(flag.Args()) < 1 {
 		log.Printf("error: must specifiy hostname.\n")
 		usage()
 		os.Exit(1)
@@ -31,11 +35,15 @@ func main() {
 	// use custom http.Client that doesn't respect redirects
 	c := &http.Client{
 		CheckRedirect: func(req *http.Request, via []*http.Request) error {
-			return http.ErrUseLastResponse
+			if !redirect {
+				return http.ErrUseLastResponse
+			} else {
+				return nil
+			}
 		},
 	}
 
-	hostname := os.Args[1]
+	hostname := flag.Arg(0)
 	r, err := c.Get(fmt.Sprintf("https://%s/", hostname))
 	if err != nil {
 		log.Fatalf("error: %v", err)
