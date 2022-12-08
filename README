@@ -5,11 +5,13 @@ for OSINT collection or subdomain enumeration.
 
 usage
 -----
-	certspy [domain]
+	certspy [-r] domain
+where:
+	-r	follow http redirect
 
 example:
 
-	$ ./certspy bsd.lv
+	$ certspy bsd.lv
 	bsd.lv
 	cvsweb.bsd.lv
 	kristaps.bsd.lv
