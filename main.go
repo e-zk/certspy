@@ -28,8 +28,15 @@ func main() {
 		os.Exit(1)
 	}
 
+	// use custom http.Client that doesn't respect redirects
+	c := &http.Client{
+		CheckRedirect: func(req *http.Request, via []*http.Request) error {
+			return http.ErrUseLastResponse
+		},
+	}
+
 	hostname := os.Args[1]
-	r, err := http.Get(fmt.Sprintf("https://%s/", hostname))
+	r, err := c.Get(fmt.Sprintf("https://%s/", hostname))
 	if err != nil {
 		log.Fatalf("error: %v", err)
 	}
