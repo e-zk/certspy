@@ -1,6 +1,10 @@
+                          __  __  __ ____ __   __ . .
+                         /   /_  /_/  /  /__  /_/ \/
+                        /__ /_  / \  /   __/ /    /  
+
 certspy
 =======
-small tool that lists alt names included in a domain's certificate.
+small tool that lists alt names included in a domain's certificate. 
 for OSINT collection or subdomain enumeration.
 
 usage
